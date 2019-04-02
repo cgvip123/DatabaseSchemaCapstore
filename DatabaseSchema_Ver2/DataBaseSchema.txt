@@ -1,0 +1,156 @@
+IP:10.102.51.54
+
+
+capstore_admin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MOBILE_NO                                 NOT NULL VARCHAR2(10)
+ NAME                                               VARCHAR2(50)
+ PASSWORD                                  NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(70)
+ 
+ customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MOBILE_NO                                 NOT NULL VARCHAR2(10)
+ NAME                                      NOT NULL VARCHAR2(50)
+ EMAIL                                     NOT NULL VARCHAR2(70)
+ PASSWORD                                  NOT NULL VARCHAR2(20)
+ GENDER                                    NOT NULL VARCHAR2(1)
+ DOB                                       NOT NULL DATE
+ WISHLIST_ID                                        VARCHAR2(10)
+ CART_ID                                            VARCHAR2(10)
+ SNO                                                VARCHAR2(10)
+ ACTIVE                                             VARCHAR2(1)
+ CUSTOMER_ADDRESS                                   VARCHAR2(10)
+ CUSTOMER_FEEDBACK                                  VARCHAR2(10)
+ 
+ address;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ADDRESS_ID                                NOT NULL VARCHAR2(10)
+ HOUSE_NO                                           VARCHAR2(10)
+ AREA                                               VARCHAR2(20)
+ CITY                                      NOT NULL VARCHAR2(20)
+ PINCODE                                   NOT NULL VARCHAR2(6)
+ STATES                                    NOT NULL VARCHAR2(30)
+ LANDMARK                                           VARCHAR2(50)
+ NAME                                               VARCHAR2(50)
+ ALTERNATE_MOBILE                                   VARCHAR2(10)
+ ADDRESS_TYPE                                       VARCHAR2(10)
+ 
+ merchant;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MOBILE_NO                                 NOT NULL VARCHAR2(10)
+ MERCHANT_NAME                             NOT NULL VARCHAR2(50)
+ EMAIL                                     NOT NULL VARCHAR2(70)
+ PASSWORD                                  NOT NULL VARCHAR2(20)
+ MERCHANT_TYPE                             NOT NULL VARCHAR2(255)
+ MERCHANT_ADDRESS                                   VARCHAR2(255)
+ MERCHANT_FEEDBACK                                  VARCHAR2(255)
+ 
+ 
+coupon
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COUPON_ID                                 NOT NULL VARCHAR2(10)
+ COUPON_CODE                               NOT NULL VARCHAR2(6)
+ DESCRIPTION                               NOT NULL VARCHAR2(50)
+ EXPIRY_DATE                               NOT NULL DATE
+ COUPON_APPLIED                                     VARCHAR2(1)
+ 
+feedback;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ FEEDBACK_ID                               NOT NULL VARCHAR2(10)
+ DESCRIPTION                               NOT NULL VARCHAR2(50)
+ RATING                                             NUMBER(5,2)
+ MOBILE_NO                                 NOT NULL VARCHAR2(10)
+ 
+orders;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_ID                                  NOT NULL VARCHAR2(10)
+ PURCHASE_DATE                                      DATE
+ DELIVERY_ADDRESS                                   VARCHAR2(255)
+ DELIVERY_DATE                                      DATE
+ ORDER_STATUS                                       VARCHAR2(20)
+ SUBTOTAL                                           NUMBER(10,2)
+ PAYMENT_ACC_NO                                     NUMBER(16)
+ 
+product;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROD_ID                                   NOT NULL VARCHAR2(10)
+ NAME                                      NOT NULL VARCHAR2(70)
+ SIZES                                              VARCHAR2(5)
+ INTIAL_QUANTITY                           NOT NULL NUMBER(5)
+ AVAILABLE_QUANTITY                        NOT NULL NUMBER(5)
+ PRICE                                              NUMBER(6,2)
+ RATING                                             NUMBER(5,2)
+ PRODUCT_CATEGORY                                   VARCHAR2(50)
+ DISCOUNT                                           NUMBER(5,2)
+ PROD_IMAGES                                        VARCHAR2(10)
+ PROD_COUPON                                        VARCHAR2(10)
+ 
+ 
+ merchant_product;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MERCHANT_ID                                        VARCHAR2(10)
+ PROD_ID                                            VARCHAR2(10)
+ 
+ 
+ orders_product;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_ID                                           VARCHAR2(10)
+ PROD_ID                                            VARCHAR2(10)
+ 
+ wishlist;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WISHLIST_ID                               NOT NULL VARCHAR2(10)
+ 
+ wishlist_product;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WISHLIST_ID                                        VARCHAR2(10)
+ PROD_ID                                            VARCHAR2(10)
+ 
+ cart;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CART_ID                                   NOT NULL VARCHAR2(10)
+ 
+ cart_product;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CART_ID                                            VARCHAR2(10)
+ PROD_ID                                            VARCHAR2(10)
+ 
+ images;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ IMAGE_ID                                  NOT NULL VARCHAR2(10)
+ URL                                                VARCHAR2(255)
+ 
+  invoice;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ INVOICE_ID                                NOT NULL VARCHAR2(10)
+ PAYMENT_OPTIONS                                    VARCHAR2(20)
+ TRANSACTION_ID                                     VARCHAR2(20)
+ 
+ savedcard;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                       NOT NULL VARCHAR2(10)
+ CARD_HOLDER_NAME                          NOT NULL VARCHAR2(50)
+ CARDNO                                    NOT NULL NUMBER(16)
+ EXPIRYMONTH                               NOT NULL NUMBER(2)
+ EXPIRY_YEAR                               NOT NULL NUMBER(4)
+ 
+ 
+ 
