@@ -1,0 +1,175 @@
+CREATE TABLE capstore_admin (
+ 	mobile_no varchar(10) check (regexp_like(mobile_no,'^[6-9][0-9]{9}')),
+ 	name varchar(50) check (regexp_like(name,'[A-Za-z]')),  
+ 	password varchar(20) NOT NULL,
+	email varchar(70),
+	PRIMARY KEY (mobile_no)
+	); 
+	
+INSERT INTO capstore_admin VALUES('8000124578','SureshSingh','123456@asd','suresh@gmail.com');
+	
+CREATE TABLE customer (
+	mobile_no varchar(10) check (regexp_like(mobile_no,'^[6-9][0-9]{9}')) NOT NULL ,
+	name varchar(50) check (regexp_like(name,'[A-Za-z]')) NOT NULL,
+	email varchar(70) NOT NULL UNIQUE,
+	password varchar(20) NOT NULL,
+	gender varchar(1) NOT NULL,
+  	dob date NOT NULL,
+	wishlist_id varchar(10),
+	cart_id varchar(10),
+	sno varchar(10),
+	active varchar(1),
+	customer_address varchar(10),
+	customer_feedback varchar(10),
+	FOREIGN KEY(customer_address) REFERENCES address(address_id),
+	FOREIGN KEY(customer_feedback) REFERENCES feedback(feedback_id),
+	PRIMARY KEY (mobile_no));
+	
+INSERT INTO customer VALUES('7800550552','Ramesh','ramesh@gmail.com','7485415@qasda','M','01-JAN-2018','W1001','C1001','S01','A','A1001','F1001');
+
+CREATE TABLE address (
+ 	address_id varchar(10),
+	house_no varchar(10),  	
+  	area varchar(20),
+	city varchar(20) NOT NULL,
+	pincode varchar(6) NOT NULL,
+	states varchar(30) NOT NULL,
+	landmark varchar(50),
+	name varchar(50),
+	alternate_mobile varchar(10),
+	address_type varchar(10),
+	PRIMARY KEY (address_id)
+	);
+	
+INSERT INTO address VALUES('A1001','R01','Talwade','Pune','412114','Maharastra','Indrayani','Ramesh','9512485178','HOME');
+INSERT INTO address VALUES('A1002','wq01','Talwade','Pune','412114','Maharastra','Indrayani','Puma','7878787878','WORK');
+
+CREATE TABLE merchant (
+	mobile_no varchar(10) NOT NULL,
+	merchant_name varchar(50) NOT NULL,
+	email varchar(70) NOT NULL ,
+	password varchar(20) NOT NULL,
+	merchant_type  varchar(255) NOT NULL,
+ 	merchant_address varchar(255) ,
+	merchant_feedback varchar(255),
+	FOREIGN KEY(merchant_feedback) REFERENCES feedback(feedback_id),
+	FOREIGN KEY(merchant_address) REFERENCES address(address_id),
+	PRIMARY KEY (mobile_no)
+	); 
+
+INSERT INTO merchant VALUES('7894561230','Puma','puma@gmail.com','12345@qwe','ThirdParty','A1002','F1001');
+
+CREATE TABLE product (
+ 	prod_id varchar(10) NOT NULL ,
+ 	name varchar(70) NOT NULL UNIQUE,
+ 	sizes varchar(5)  ,
+ 	intial_quantity number(5) NOT NULL,
+	available_quantity number(5) NOT NULL,
+	price number(6,2),
+ 	rating number(5,2),
+	product_category varchar(50),
+	discount number(5,2),	
+	PRIMARY KEY (prod_id)
+	);
+INSERT INTO product VALUES('P1001','Puma','9',10,10,2500.0,4.0,'Shoes',100.0);
+
+CREATE TABLE merchant_product(
+	merchant_id varchar(10),
+	prod_id varchar(10),
+	FOREIGN KEY(merchant_id) REFERENCES merchant(mobile_no),
+	FOREIGN KEY(prod_id) REFERENCES product(prod_id)
+	);
+ 		
+		
+CREATE TABLE coupon (
+ 	coupon_id varchar(10) NOT NULL,
+ 	coupon_code varchar(6) NOT NULL, 	
+ 	description varchar(50) NOT NULL,
+ 	expiry_date date NOT NULL,
+ 	coupon_applied varchar(1),	
+	PRIMARY KEY (coupon_id)
+	);
+	
+INSERT INTO coupon VALUES('C1001','CodeMe','Free Delivery','29-DEC-2020','T');
+
+CREATE TABLE feedback (
+ 	feedback_id varchar(10) NOT NULL,
+ 	description varchar(50) NOT NULL,
+	rating number(5,2),
+	mobile_no varchar(10) NOT NULL,
+	PRIMARY KEY (feedback_id)
+	);
+
+INSERT INTO feedback VALUES('F1001','Good',4.0,'7800550552');
+
+CREATE TABLE orders (
+ 	order_id varchar(10) NOT NULL,
+	purchase_date date,
+    delivery_address varchar(255),
+	delivery_date date,
+	order_status varchar(20),
+	subtotal  number(10,2),
+	PRIMARY KEY (order_id),
+	FOREIGN KEY (delivery_address) REFERENCES address(address_id)
+	);
+	INSERT INTO orders VALUES('O1001','04-APR-2019','A1001','06-APR-2019','DELIVERED',500.0);
+
+	CREATE TABLE orders_product(
+	order_id varchar(10),
+	prod_id varchar(10),
+	FOREIGN KEY (prod_id) REFERENCES product(prod_id),
+	FOREIGN KEY (order_id) REFERENCES orders(order_id)
+	);
+
+
+
+CREATE TABLE cart (
+ 	cart_id varchar(10) NOT NULL,
+	PRIMARY KEY (cart_id)
+	);
+	
+CREATE TABLE cart_product(
+	cart_id varchar(10),
+	prod_id varchar(10),
+	FOREIGN KEY (prod_id) REFERENCES product(prod_id),
+	FOREIGN KEY (cart_id) REFERENCES cart(cart_id)
+	);
+	
+CREATE TABLE images(
+	image_id varchar(10) NOT NULL,
+	url varchar(255),
+	PRIMARY KEY (image_id)
+	);
+
+CREATE TABLE invoice (
+ 	invoice_id varchar(10) NOT NULL ,
+	payment_options varchar(20),
+	transaction_id varchar(20) ,
+	PRIMARY KEY (invoice_id)
+	);
+
+
+CREATE TABLE savedCard(
+	sno varchar(10) NOT NULL,
+	card_holder_name varchar(50) NOT NULL,
+	cardno number(16) NOT NULL,
+	expirymonth number(2) NOT NULL,
+	expiry_year number(4) NOT NULL,
+	PRIMARY KEY (sno)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
